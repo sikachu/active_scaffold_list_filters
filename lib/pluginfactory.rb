@@ -164,13 +164,13 @@ module PluginFactory
 	### Inheritance callback -- Register subclasses in the derivatives hash
 	### so that ::create knows about them.
 	def inherited( subclass )
-		keys = [ subclass.name, subclass.name.downcase, subclass ]
+		keys = [ subclass.name, subclass.name.underscore, subclass ]
 
 		# Handle class names like 'FooBar' for 'Bar' factories.
 		if subclass.name.match( /(?:.*::)?(\w+)(?:#{self.factory_type})/i )
-			keys << Regexp.last_match[1].downcase
+			keys << Regexp.last_match[1].underscore
 		else
-			keys << subclass.name.sub( /.*::/, '' ).downcase
+			keys << subclass.name.sub( /.*::/, '' ).underscore
 		end
 
 		keys.uniq.each {|key|
@@ -219,17 +219,17 @@ module PluginFactory
 		return self if ( self.name == className || className == '' )
 		return className if className.is_a?( Class ) && className >= self
 
-		unless self.derivatives.has_key?( className.downcase )
+		unless self.derivatives.has_key?( className.underscore )
 			self.load_derivative( className )
 
-			unless self.derivatives.has_key?( className.downcase )
+			unless self.derivatives.has_key?( className.underscore )
 				raise FactoryError,
 					"load_derivative(%s) didn't add a '%s' key to the "\
 					"registry for %s" %
-					[ className, className.downcase, self.name ]
+					[ className, className.underscore, self.name ]
 			end
 
-			subclass = self.derivatives[ className.downcase ]
+			subclass = self.derivatives[ className.underscore ]
 			unless subclass.is_a?( Class )
 				raise FactoryError,
 					"load_derivative(%s) added something other than a class "\
@@ -238,7 +238,7 @@ module PluginFactory
 			end
 		end
 
-		return self.derivatives[ className.downcase ]
+		return self.derivatives[ className.underscore ]
 	end
 	alias_method :getSubclass, :get_subclass
 	
@@ -265,11 +265,11 @@ module PluginFactory
 
 		# Check to see if the specified listener is now loaded. If it
 		# is not, raise an error to that effect.
-		unless self.derivatives[ className.downcase ]
+		unless self.derivatives[ className.underscore ]
 			raise FactoryError,
 				"Couldn't find a %s named '%s'. Loaded derivatives are: %p" % [
 				self.factory_type,
-				className.downcase,
+				className.underscore,
 				self.derivatives.keys,
 			], caller(3)
 		end
@@ -374,10 +374,10 @@ module PluginFactory
 
 		# Make permutations of the two parts
 		path << modname
-		path << modname.downcase
+		path << modname.underscore
 		path << modname			 + myname
-		path << modname.downcase + myname
-		path << modname.downcase + myname.downcase
+		path << modname.underscore + myname
+		path << modname.underscore + myname.underscore
 
 		# If a non-empty subdir was given, prepend it to all the items in the
 		# path

@@ -15,7 +15,7 @@ module ActiveScaffold::DataStructures
       @label = filter_name.to_s
 			@core = core
 			@options = options
-			@filter_type = self.class.to_s.downcase
+			@filter_type = self.class.to_s.underscore
 
       # apply quick properties
       options.each_pair do |k, v|

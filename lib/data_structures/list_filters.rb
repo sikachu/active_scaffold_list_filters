@@ -8,7 +8,7 @@ module ActiveScaffold::DataStructures
 
     # adds an ListFilter, creating one from the arguments if need be
     def add(filter_type, filter_name, columns, options = {})	
-			filter = ActiveScaffold::DataStructures::ListFilter::create(filter_type.to_s, filter_name, columns, options)
+			filter = ActiveScaffold::DataStructures::ListFilter::create(filter_type.to_s.camelcase, filter_name, columns, options)  
 			@set << filter # unless @set.any? {|f| f.filter == filter.filter}
 		end
     alias_method :<<, :add
