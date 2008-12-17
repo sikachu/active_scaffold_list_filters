@@ -42,7 +42,7 @@ Current implemented filters
   
         config.list\_filter.add(:values, :status, {:label => "User status", :field => :status, :values => [["Activated", "activated"], ["Not activated", "not\_activated"]] })
   
-* **:date_range**
+* **:date\_range**
 
   Filter record in between two date ranges
   
