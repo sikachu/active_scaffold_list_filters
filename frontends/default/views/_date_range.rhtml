@@ -1,0 +1,22 @@
+<div style='margin-bottom: 1em;'>
+<ol style='width: 100%'>
+  <%- 
+    if filter_session["start"] and filter_session["end"]
+      date_start = Date.parse "#{filter_session["start"]["year"]}-#{filter_session["start"]["month"]}-#{filter_session["start"]["day"]}"
+  	  date_end = Date.parse "#{filter_session["end"]["year"]}-#{filter_session["end"]["month"]}-#{filter_session["end"]["day"]}"
+	  else
+      date_start = filter.core.model.find(:first, :order => 'updated_at DESC', :select => "created_at").created_at
+      date_end = filter.core.model.find(:first, :order => 'updated_at ASC', :select => "created_at").created_at
+    end
+   -%>
+  <li style='float: left; width: 50%;'>
+    <label for="<%= list_filter_input_name(filter) %>[start]">Start date:</label>
+    <%= select_date date_start, :prefix => "#{list_filter_input_name(filter)}[start]" %>
+  </li>
+  <li style='float: left; width: 50%;'>
+    <label for="<%= list_filter_input_name(filter) %>[end]">End date:</label>
+    <%= select_date date_end, :prefix => "#{list_filter_input_name(filter)}[end]" %>
+  </li>
+</ol>
+<br style='clear: left;'>
+</div>
