@@ -13,7 +13,7 @@ Add a filter menu at the top of the ActiveScaffold List view.  The filter can be
 Todo/Know Bugs (Please Help!)
 -----------------------------
 
-* If you have activescaffoldexport installed, please see this kb issue: http://code.google.com/p/activescaffoldexport/issues/detail?id=4
+* If you have activescaffoldexport installed, please see this kb issue: [http://code.google.com/p/activescaffoldexport/issues/detail?id=4](http://code.google.com/p/activescaffoldexport/issues/detail?id=4)
 * Have the reset link not close the filter, but actually reset it.
 * Ability to save filters (and table orderings!) to the database, this will be a separate plugin.
 * Association filter may not work with has_and_belongs_to_many associations.
