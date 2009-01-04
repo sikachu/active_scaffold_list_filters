@@ -1,7 +1,7 @@
 <div style='margin-bottom: 1em;'>
 <ol style='width: 100%'>
   <%- 
-    if filter_session["start"] and filter_session["end"]
+    if filter_session and filter_session["start"] and filter_session["end"]
       date_start = Date.parse "#{filter_session["start"]["year"]}-#{filter_session["start"]["month"]}-#{filter_session["start"]["day"]}"
   	  date_end = Date.parse "#{filter_session["end"]["year"]}-#{filter_session["end"]["month"]}-#{filter_session["end"]["day"]}"
 	  else
