@@ -1,7 +1,7 @@
 module ActiveScaffold
   module Helpers
     module ViewHelpers
-      # Add the export plugin includes
+      # Add the list filter plugin includes
       def active_scaffold_includes_with_list_filter(frontend = :default)
         css = stylesheet_link_tag(ActiveScaffold::Config::Core.asset_path('list_filter-stylesheet.css', frontend))
         ie_css = stylesheet_link_tag(ActiveScaffold::Config::Core.asset_path("list_filter-stylesheet-ie.css", frontend))

@@ -1,7 +1,7 @@
 module ActiveScaffold
 	module Helpers
 		# A bunch of helper methods to produce the common view ids
-    module Ids
+    module IdHelpers
 			def list_filter_form_id
         "#{controller_id}-list_filter-form"
       end

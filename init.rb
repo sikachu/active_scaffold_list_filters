@@ -12,10 +12,6 @@ require "#{File.dirname(__FILE__)}/lib/data_structures/list_filters.rb"
 require "#{File.dirname(__FILE__)}/lib/helpers/id_helpers_override.rb"
 require "#{File.dirname(__FILE__)}/lib/helpers/view_helpers_override.rb"
 
-# custom filters
-#Kernel::load 'lib/list_filters/base.rb'
-#Kernel::load 'lib/list_filters/association.rb'
-
 ##
 ## Run the install script, too, just to make sure
 ## But at least rescue the action in production
