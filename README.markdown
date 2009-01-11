@@ -42,15 +42,13 @@ Current implemented filters
   
         config.list\_filter.add(:values, :status, {:label => "User status", :field => :status, :values => [["Activated", "activated"], ["Not activated", "not\_activated"]] })
   
-* **:association\_values**
-
-  Filter records by AR attributes just like the :values field, except on an association. This is handy if you are
-  displaying association data and want to filter that, too. Ex. to filter a blog posts' comments count while viewing
+  Also, :values filter supports values on associations. This is handy if you are displaying association data
+  and want to filter that, too. Ex. to filter a blog posts' comments count while viewing
   a list of posts, you might need to do something like:
   
         (in PostController)
         
-        config.list\_filter.add(:association\_values, :verified, {
+        config.list\_filter.add(:values, :verified, {
             :label => "Verified Comments",
             :field => :verified,
             :table_name => :comments,
@@ -62,7 +60,7 @@ Current implemented filters
   Additionally, to make things really crazy (read: slow), it also takes a :through parameter. In the example above, if
   for some reason your comments were only related to posts through users, you could do:
   
-        config.list\_filter.add(:association\_values, :verified, {
+        config.list\_filter.add(:values, :verified, {
             :label => "Verified Comments",
             :field => :verified,
             :table_name => :comments,

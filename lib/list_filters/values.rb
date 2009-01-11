@@ -1,8 +1,13 @@
 class Values < ActiveScaffold::DataStructures::ListFilter
-
-	# Return a list of conditions based on the params 
-	def conditions(params)
-		return ["`#{@core.model.table_name}`.`#{options[:field]}` IN (?)", params]
-	end
-	
+  def conditions(params)
+    add_through_option_to_includes if options[:through]
+    table_name = options[:table_name] || @core.model.table_name
+    return ["`#{table_name}`.`#{options[:field]}` IN (?)", params]
+  end
+  
+  def add_through_option_to_includes
+    if !@core.columns[options[:through]].includes.include?(options[:table_name])
+      @core.columns[options[:through]].includes << options[:table_name] 
+    end
+  end
 end
