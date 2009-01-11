@@ -10,11 +10,11 @@
     end
    -%>
   <li style='float: left; width: 50%;'>
-    <label for="<%= list_filter_input_name(filter) %>[start]">Start date:</label>
+    <label for="<%= list_filter_input_name(filter) %>[start]">From date:</label>
     <%= select_date date_start, :prefix => "#{list_filter_input_name(filter)}[start]" %>
   </li>
   <li style='float: left; width: 50%;'>
-    <label for="<%= list_filter_input_name(filter) %>[end]">End date:</label>
+    <label for="<%= list_filter_input_name(filter) %>[end]">To date:</label>
     <%= select_date date_end, :prefix => "#{list_filter_input_name(filter)}[end]" %>
   </li>
 </ol>
