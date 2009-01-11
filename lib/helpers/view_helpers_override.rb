@@ -11,7 +11,8 @@ module ActiveScaffold
       
       def list_filter_date_select(date, start_or_stop, filter)
         if defined?(CalendarDateSelect)
-          calendar_date_select_tag "#{list_filter_input_name(filter)}[text_#{start_or_stop}]", date
+          calendar_date_select_tag "#{list_filter_input_name(filter)}[text_#{start_or_stop}]", date,
+            :after_close => "$('#{list_filter_form_id}').onsubmit()"
         else
           select_date date, :prefix => "#{list_filter_input_name(filter)}[#{start_or_stop}]"
         end
