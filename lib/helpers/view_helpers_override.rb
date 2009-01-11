@@ -8,6 +8,14 @@ module ActiveScaffold
         active_scaffold_includes_without_list_filter + "\n" + css + "\n<!--[if IE]>" + ie_css + "<![endif]-->\n"
       end
       alias_method_chain :active_scaffold_includes, :list_filter
+      
+      def list_filter_date_select(date, start_or_stop, filter)
+        if defined?(CalendarDateSelect)
+          calendar_date_select_tag "#{list_filter_input_name(filter)}[text_#{start_or_stop}]", date
+        else
+          select_date date, :prefix => "#{list_filter_input_name(filter)}[#{start_or_stop}]"
+        end
+      end
     end
   end
 end
