@@ -1,4 +1,3 @@
-require 'ruby-debug'
 class Values < ActiveScaffold::DataStructures::ListFilter
   def conditions(params)
     add_through_option_to_includes if options[:through]
