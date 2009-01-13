@@ -4,18 +4,21 @@
     if filter_session and filter_session["start"] and filter_session["end"]
       date_start = Date.parse "#{filter_session["start"]["year"]}-#{filter_session["start"]["month"]}-#{filter_session["start"]["day"]}"
   	  date_end = Date.parse "#{filter_session["end"]["year"]}-#{filter_session["end"]["month"]}-#{filter_session["end"]["day"]}"
-	  else
-      date_start = filter.core.model.find(:first, :order => 'updated_at DESC', :select => "created_at").created_at
-      date_end = filter.core.model.find(:first, :order => 'updated_at ASC', :select => "created_at").created_at
+	  elsif filter_session and filter_session["text_start"] and filter_session["text_end"]
+      date_start = filter_session['text_start'].to_date
+      date_end = filter_session['text_end'].to_date
+    else
+      date_start = filter.core.model.find(:first, :order => 'created_at ASC', :select => "created_at").created_at
+      date_end = filter.core.model.find(:first, :order => 'updated_at DESC', :select => "updated_at").updated_at
     end
    -%>
   <li style='float: left; width: 50%;'>
-    <label for="<%= list_filter_input_name(filter) %>[start]">From date:</label>
-    <%= select_date date_start, :prefix => "#{list_filter_input_name(filter)}[start]" %>
+    <label for="<%= list_filter_date_select_input_name(filter, "start") %>">Start date:</label>
+    <%= list_filter_date_select(date_start, "start", filter)%>
   </li>
   <li style='float: left; width: 50%;'>
-    <label for="<%= list_filter_input_name(filter) %>[end]">To date:</label>
-    <%= select_date date_end, :prefix => "#{list_filter_input_name(filter)}[end]" %>
+    <label for="<%= list_filter_date_select_input_name(filter, "end") %>">End date:</label>
+    <%= list_filter_date_select(date_end, "end", filter)%>
   </li>
 </ol>
 <br style='clear: left;'>

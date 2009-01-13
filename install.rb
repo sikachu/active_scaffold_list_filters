@@ -26,4 +26,11 @@ Dir.chdir(Dir.getwd.sub(/vendor.*/, '')) do
 	    copy_files(source, destination, directory)
 	  end
 	end
+	
+	available_frontends.each do |frontend|
+    views_source = "/frontends/#{frontend}/views/"
+    views_destination = "/vendor/plugins/active_scaffold/frontends/#{frontend}/views/"
+    copy_files(views_source, views_destination, directory)
+  end
+  
 end

@@ -42,11 +42,41 @@ Current implemented filters
   
         config.list\_filter.add(:values, :status, {:label => "User status", :field => :status, :values => [["Activated", "activated"], ["Not activated", "not\_activated"]] })
   
+  Also, :values filter supports values on associations. This is handy if you are displaying association data
+  and want to filter that, too. Ex. to filter a blog posts' comments count while viewing
+  a list of posts, you might need to do something like:
+  
+        (in PostController)
+        
+        config.list\_filter.add(:values, :verified, {
+            :label => "Verified Comments",
+            :field => :verified,
+            :table_name => :comments,
+            :values => [["Verified", "verified"]]
+        })
+        
+  This would essentially be checking that the comment count for posts was only for verified comments.
+
+  Additionally, to make things really crazy (read: slow), it also takes a :through parameter. In the example above, if
+  for some reason your comments were only related to posts through users, you could do:
+  
+        config.list\_filter.add(:values, :verified, {
+            :label => "Verified Comments",
+            :field => :verified,
+            :table_name => :comments,
+            :through => :users,
+            :values => [["Verified", "verified"]]
+        })
+  
+  The PostsController filter would then make an include to grab the values through the users table.
+  Again, this will be slow.
+
 * **:date\_range**
 
   Filter record in between two date ranges
   
         config.list\_filter.add(:date\_range, :create_at, {:label => "User registration", :field => :created\_at })
+
 
 Installing
 ----------
